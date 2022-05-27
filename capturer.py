@@ -45,6 +45,15 @@ class Capturer:
             self.capture.snap()
             print("Snap!")
 
+    @staticmethod
+    def print_help_message():
+        print("""CAPTURER – create captures with frame timings
+Default controls:
+    Home: start a new capture
+    L key: snap a frame
+    End: stop and save
+    Delete: terminate the program""")
+
 
 class Capture:
     EXTENSION = ".capture"
@@ -62,7 +71,7 @@ class Capture:
         self.start_time = time.time()
         self.timestamps = []
         if name is None:
-            name = str(time.time())
+            name = self.generate_name()
         self.name = name
 
     def snap(self):
@@ -72,6 +81,10 @@ class Capture:
         with open(self.name+self.EXTENSION, "w") as file:
             file.write(",".join(map(str,self.timestamps)))
 
+    def generate_name(self):
+        return str(time.time())
+
 
 if __name__ == "__main__":
-    capturer = Capturer(input("Enter the capture name:"))
+    Capturer.print_help_message()
+    capturer = Capturer(input("Enter a new capture name:"))

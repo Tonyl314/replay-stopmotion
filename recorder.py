@@ -55,7 +55,16 @@ class Recorder:
         digits = (4-len(digits))*"0" + digits
         return digits
 
+    @staticmethod
+    def print_help_message():
+        print("""RECORDER – load captures to record replayed footage
+Default controls:
+    Home: record the screen (saves images)
+    End: export to a video (requires FFMPEG installed and in PATH)
+    Delete: terminate the program""")
+
 
 if __name__ == "__main__":
     recorder = Recorder()
-    recorder.prepare(input("Enter the capture name:"))
+    recorder.print_help_message()
+    recorder.prepare(input("Enter an existing capture name:"))

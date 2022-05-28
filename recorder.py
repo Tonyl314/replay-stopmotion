@@ -39,7 +39,7 @@ class Recorder:
             for i, snap_time in enumerate(self.capture.timestamps):
                 while time.time()-start_time < snap_time:
                     pass
-                filename = self.make_four_digit(i) + ".png"
+                filename = self.make_four_digit(i) + self.IMAGE_EXTENSION
                 print(sct.shot(mon=0, output=f"{self.capture.name}\\{filename}"))
         self.is_recording = False
         print("Recording ended.")

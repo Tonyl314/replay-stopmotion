@@ -5,7 +5,7 @@ from pynput import keyboard
 from capturer import Capture
 
 class Recorder:
-    IMAGE_EXTENSION = ".png"
+    IMAGE_EXTENSION = ".jpg"
     VIDEO_EXTENSION = ".mp4"
     # the recorder is prepared with a capture, then records on a set key press
 

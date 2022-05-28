@@ -2,6 +2,8 @@ import time
 from pynput import keyboard
 
 class Capturer:
+    ALPHANUMERIC_SNAP_KEY = "f"
+
     def __init__(self, capture_name=None):
         self.capture = None
         self.capture_name = capture_name
@@ -41,16 +43,17 @@ class Capturer:
             return # not an alphanumeric key
         if not self.is_capturing:
             return
-        if key.char == "l":
+        if key.char == self.ALPHANUMERIC_SNAP_KEY:
             self.capture.snap()
             print("Snap!")
 
-    @staticmethod
-    def print_help_message():
-        print("""CAPTURER – create captures with frame timings
+    @classmethod
+    def print_help_message(cls):
+        snap_key = cls.ALPHANUMERIC_SNAP_KEY.upper()
+        print(f"""CAPTURER – create captures with frame timings
 Default controls:
     Home: start a new capture
-    L key: snap a frame
+    {snap_key} key: snap a frame
     End: stop and save
     Delete: terminate the program""")
 

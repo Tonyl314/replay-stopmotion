@@ -5,7 +5,7 @@ from pynput import keyboard
 from capturer import Capture
 
 class Recorder:
-    IMAGE_EXTENSION = ".jpg"
+    IMAGE_EXTENSION = ".png"
     VIDEO_EXTENSION = ".mp4"
     # the recorder is prepared with a capture, then records on a set key press
 
@@ -15,8 +15,6 @@ class Recorder:
 
     def prepare(self, capture_name):
         self.capture = Capture.load(capture_name)
-        if not os.path.exists(self.capture.name):
-            os.mkdir(self.capture.name) # this is where the frames are saved
         with keyboard.Listener(on_press=self.on_press) as listener:
             listener.join()
 
@@ -40,15 +38,16 @@ class Recorder:
                 while time.time()-start_time < snap_time:
                     pass
                 filename = self.make_four_digit(i) + self.IMAGE_EXTENSION
-                print(sct.shot(mon=0, output=f"{self.capture.name}\\{filename}"))
+                print(sct.shot(mon=0, output=f"{self.capture.get_folder_path()}\\{filename}"))
         self.is_recording = False
         print("Recording ended.")
 
     def export_video(self, framerate):
-        input_filenames = f"{self.capture.name}\\%04d{self.IMAGE_EXTENSION}"
-        output_filename = f"{self.capture.name}\\video{self.VIDEO_EXTENSION}"
+        print("Exporting video...")
+        input_filenames = f"{self.capture.get_folder_path()}\\%04d{self.IMAGE_EXTENSION}"
+        output_filename = f"{self.capture.get_folder_path()}\\video{self.VIDEO_EXTENSION}"
         os.system(f"ffmpeg -framerate {framerate} -i {input_filenames} {output_filename}")
-        print("Video exported.")
+        print("Exporting ended.")
 
     def make_four_digit(self, number):
         digits = str(number)

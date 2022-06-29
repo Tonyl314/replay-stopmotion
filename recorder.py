@@ -45,7 +45,7 @@ class Recorder:
     def export_video(self, framerate):
         print("Exporting video...")
         input_filenames = f"{self.capture.get_folder_path()}\\%04d{self.IMAGE_EXTENSION}"
-        output_filename = f"{self.capture.get_folder_path()}\\video{self.VIDEO_EXTENSION}"
+        output_filename = f"{self.capture.get_folder_path()}\\{self.capture.name}{self.VIDEO_EXTENSION}"
         os.system(f"ffmpeg -framerate {framerate} -i {input_filenames} {output_filename}")
         print("Exporting ended.")
 

@@ -46,7 +46,7 @@ class Recorder:
         print("Exporting video...")
         input_filenames = f"{self.capture.get_folder_path()}\\%04d{self.IMAGE_EXTENSION}"
         output_filename = f"{self.capture.get_folder_path()}\\{self.capture.name}{self.VIDEO_EXTENSION}"
-        os.system(f"ffmpeg -framerate {framerate} -i {input_filenames} {output_filename}")
+        os.system(f"ffmpeg -framerate {framerate} -i {input_filenames} -pix_fmt yuv420p {output_filename}")
         print("Exporting ended.")
 
     def make_four_digit(self, number):
